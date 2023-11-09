@@ -12,7 +12,7 @@ const useMe = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return data;
 };
