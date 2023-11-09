@@ -1,6 +1,6 @@
 "use client";
 
-import { Box } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { useState } from "react";
 
 export default function SignInPage() {
@@ -16,13 +16,15 @@ export default function SignInPage() {
     >
       <form method="POST" action="/api/auth/signin">
         <h1>Sign In</h1>
-        <Box>
-          <input
+        <Box flexDirection="column" gap={2} display="flex">
+          <TextField
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <button type="submit">Submit</button>
+          <Button type="submit" variant="contained">
+            Submit
+          </Button>
         </Box>
       </form>
     </Box>
