@@ -39,4 +39,4 @@ jobs:
 
       - name: Upload
         run: |
-          gsutil -m rsync -R build gs://haku-app-web
+          gsutil -m -h "Cache-Control:no-cache" rsync -R build gs://haku-app-web

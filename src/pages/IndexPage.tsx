@@ -16,7 +16,7 @@ export function IndexPage() {
     >
       <h1>
         Hello, {data?.email ? data.email : " unathorized"}!<br />
-        Are you ready for a joke?
+        Are you ready for a joke?!
       </h1>
     </Box>
   );
