@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 
-export function SignInCheckPage() {
+export default function SignInCheckPage() {
   return (
     <Box
       display="flex"

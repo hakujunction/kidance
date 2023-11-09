@@ -1,7 +1,9 @@
-import { Box, Button, Input } from "@mui/material";
+"use client";
+
+import { Box } from "@mui/material";
 import { useState } from "react";
 
-export function SignInPage() {
+export default function SignInPage() {
   const [email, setEmail] = useState("");
 
   return (
@@ -15,14 +17,12 @@ export function SignInPage() {
       <form method="POST" action="/api/auth/signin">
         <h1>Sign In</h1>
         <Box>
-          <Input
+          <input
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Button variant="contained" color="primary" type="submit">
-            Submit
-          </Button>
+          <button type="submit">Submit</button>
         </Box>
       </form>
     </Box>
