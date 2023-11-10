@@ -1,21 +1,9 @@
 "use client";
 
 import { Box } from "@mui/material";
-import { useCallback, useEffect, useState } from "react";
+import { useMe } from "./hooks/useMe";
 
-const useMe = () => {
-  const [data, setData] = useState<{ email: string } | null>(null);
-
-  const fetchData = useCallback(async () => {
-    setData(await fetch("/api/getMe").then((res) => res.json()));
-  }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
-  return data;
-};
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function IndexPage() {
   const data = useMe();
@@ -23,15 +11,25 @@ export default function IndexPage() {
   return (
     <Box
       display="flex"
-      flex={1}
       justifyContent="center"
       alignItems="center"
       height="100%"
+      flexDirection='column'
     >
-      <h1>
-        Hello, {data?.email ? data.email : " unathorized"}!<br />
-        Are you ready for a joke?!
-      </h1>
+      
+      {data.status != 'resolved' 
+        ? <CircularProgress />
+        : (
+          <>
+          <h1>
+            Hello, {data?.email ? data.email : " unathorized"}!
+          </h1>
+          <h2>
+            Are you ready for a joke?!
+          </h2>
+        </>
+        )
+     }
     </Box>
   );
 }

@@ -6,7 +6,7 @@ const nextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: "http://localhost:3001/api/:path*", // Proxy to Backend
+        destination: "https://staging.haku.underoot.dev/api/:path*", // Proxy to Backend
       },
     ];
   },
