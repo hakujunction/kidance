@@ -1,0 +1,42 @@
+name: Push to staging
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  docker-release:
+    name: Docker release to Google Artifact Registry
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: "read"
+      id-token: "write"
+
+    steps:
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - id: auth
+        name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          token_format: access_token
+          workload_identity_provider: projects/264454930446/locations/global/workloadIdentityPools/github-2023-11-09/providers/github
+          service_account: github@haku-testing.iam.gserviceaccount.com
+          access_token_lifetime: 300s
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          version: ">= 363.0.0"
+
+      - name: Upload
+        run: |
+          gsutil -m -h "Cache-Control:no-cache" rsync -R out gs://haku-app-web
