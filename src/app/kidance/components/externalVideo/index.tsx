@@ -13,7 +13,7 @@ export default function ExternalVideo({
       <video
       id="video"
       ref={videoRef as any}
-      controls onEnded={onEnded}
+      onEnded={onEnded}
       preload='auto'
       >
         <source src="/dance.mp4" type="video/mp4"/>
