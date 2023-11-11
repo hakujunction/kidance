@@ -17,7 +17,7 @@ const style = {
   alignItems: 'center'
 };
 
-export const StartCounter = () => {
+export const StartCounter = ({playVideo}: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const [counter, setCounter] = useState(5);
 
@@ -31,6 +31,7 @@ export const StartCounter = () => {
                         if (counter - 1 === -1) {
                           clearInterval(timeoutId);
                           setIsOpen(false);
+                          playVideo();
                           return 5;
                         } else {
                           return counter - 1;

@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Button, Modal, Paper, Popover, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Grid from '@mui/material/Grid';
 import { relative } from "path";
@@ -9,17 +9,22 @@ import { StartCounter } from "./components/startCounter";
 import { StyledText } from "./components/styledText";
 import { TotalResult } from "./components/totalResult";
 
-const style = {
-  width: '100vw',
-  height: '100vh',
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  justifyContent: 'center',
-  alignItems: 'center'
-};
 
 export default function KidancePage() {
+  const videoRef = useRef<HTMLVideoElement>();
+  const playVideo = (event: any) => {
+    videoRef.current && videoRef.current.play();
+  };
+
+  return (
+    <Box bgcolor='#000' width='100%'>
+    <video ref={videoRef as any} controls >
+      <source src="/dance.mp4" type="video/mp4"/>
+    </video>
+    <StartCounter playVideo={playVideo} />  
+    </Box>
+  )
+
   return (
     <>
     <Box
@@ -45,7 +50,7 @@ export default function KidancePage() {
                     height: 240,
                   }}
                 >
-                  Img
+                  
                 </Paper>
               </Grid>
               <Grid item xs={12} md={12} lg={6}>
