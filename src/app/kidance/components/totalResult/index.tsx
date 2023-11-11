@@ -18,7 +18,7 @@ const style = {
   alignItems: 'center'
 };
 
-export const TotalResult = ({setIsShown, onRetry}: {setIsShown: any, onRetry: any}) => {
+export const TotalResult = ({setIsShown, onRetry, result }: {setIsShown: any, onRetry: any, result: number}) => {
   return (
     <>
     <Box
@@ -29,7 +29,7 @@ export const TotalResult = ({setIsShown, onRetry}: {setIsShown: any, onRetry: an
     >
       <Box position={'relative'} padding={'10px'} zIndex={'9999'}>
       <Box paddingX={'20px'} textAlign={'center'}>
-        <StyledText>Total Result: <br/> 80% <br/> <b>Try Again</b></StyledText>
+        <StyledText>Total Result: <br/> {result}% <br/> <b>Try Again</b></StyledText>
       </Box>
       </Box>
     </Box>

@@ -7,11 +7,18 @@ import { StartCounterButton } from "./components/startCounterButton";
 import { TotalResult } from "./components/totalResult";
 import { StartCounter } from "./components/counter";
 import { MyVideo } from "./components/myVideo";
+import { VideoProcessing } from "./components/videoProcessing";
+import { PoseDetector, SupportedModels, createDetector } from "@tensorflow-models/pose-detection";
 
 export default function KidancePage() {
+  const [result, setResult] = useState(0);
   const myVideoRef = useRef<HTMLVideoElement>(null);
-  const videoRef = useRef<HTMLVideoElement>();
-  const playVideo = (event: any) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const detector = useRef<PoseDetector | null>(null);
+  const playVideo = async (event: any) => {
+    if (!detector.current) {
+      detector.current = await createDetector(SupportedModels.MoveNet);
+    }
     videoRef.current && videoRef.current.play();
   };
   const [showResult, setShowResult] = useState<boolean>(false);
@@ -28,11 +35,17 @@ export default function KidancePage() {
       </video>
       <StartCounterButton setIsOpen={setIsOpenCounter}  />
       {isOpenCounter && <StartCounter setIsOpen={setIsOpenCounter} playVideo={playVideo}/>}
-      {showResult && <TotalResult setIsShown={setShowResult}  onRetry={() => {
+      {showResult && <TotalResult setIsShown={setShowResult} result={result} onRetry={() => {
         setIsOpenCounter(true);
       }}/>}
       </Box>
       <MyVideo videoRef={myVideoRef} />
+      <VideoProcessing 
+        detector={detector}
+        videoRef={videoRef} 
+        myVideoRef={myVideoRef} 
+        onScoreUpdate={setResult} 
+      />
     </>
   )
 }
