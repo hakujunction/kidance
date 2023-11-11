@@ -1,10 +1,6 @@
 "use client";
 
-import { Box, Button, Modal, Paper, Popover, TextField, Typography } from "@mui/material";
-import { useState } from "react";
-
-import Grid from '@mui/material/Grid';
-import { relative } from "path";
+import { Box, Typography } from "@mui/material";
 
 const style = {
   width: '100vw',
@@ -16,13 +12,18 @@ const style = {
   alignItems: 'center'
 };
 
-export const StyledText = ({children}: {children: any}) => {
+export const StyledText = ({
+  children,
+  fontSize
+}: {children: React.ReactNode | string, fontSize?: string}) => {
+
+
 
   return (
     <Box paddingX='10px' position='relative' textAlign={'center'}>
-        <Typography color={'pink'} fontSize={144}>{children}</Typography>
+        <Typography color={'pink'} fontSize={fontSize || '144px'}>{children}</Typography>
         <Box position={"absolute"} zIndex={'9999'} top='4px' left='14px'>
-        <Typography color={'violet'}  fontSize={144}>{children}</Typography>
+        <Typography color={'violet'}  fontSize={fontSize || '144px'}>{children}</Typography>
         </Box>
     </Box>
   );

@@ -18,3 +18,17 @@ body {
   margin-right: -50%;
   transform: translate(-50%, -50%);
 }
+
+.example-style {
+  animation: fade-in 2s;
+  transition: all 250ms linear 2s;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100;
+  }
+}

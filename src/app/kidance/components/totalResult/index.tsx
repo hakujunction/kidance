@@ -1,12 +1,8 @@
 "use client";
 
-import { Box, Button, Modal, Paper, Popover, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Box} from "@mui/material";
 
-import Grid from '@mui/material/Grid';
-import { relative } from "path";
 import { StyledText } from "../styledText";
-import { StartCounter } from "../counter";
 
 const style = {
   width: '100vw',
@@ -18,7 +14,10 @@ const style = {
   alignItems: 'center'
 };
 
-export const TotalResult = ({setIsShown, onRetry, result }: {setIsShown: any, onRetry: any, result: number}) => {
+export const TotalResult = (
+  {setIsShown, onRetry, result }: 
+  {setIsShown: any, onRetry: any, result: number}
+) => {
   return (
     <>
     <Box
