@@ -4,6 +4,8 @@ import { RefObject, useEffect, useRef } from "react";
 import { Positions, getPositions, keyPointsToObject } from "./utils";
 import { Pose, PoseDetector } from "@tensorflow-models/pose-detection";
 
+const ONPROGRESS_INTRVAL = '1000';
+
 type VideoProcessingProps = {
   videoRef: RefObject<HTMLVideoElement>;
   myVideoRef: RefObject<HTMLVideoElement>;
@@ -63,7 +65,7 @@ export function VideoProcessing({ videoRef, myVideoRef, detector, onScoreUpdate,
         const currFrameHitCount = frameHitCount.current - lastFrameHitCount.current;
 
         onProgress?.(Math.floor(currFrameHitCount / currFrameCount * 100))
-      }, 2000);
+      }, ONPROGRESS_INTRVAL);
 
       requestAnimationFrame(async function detectPoses() {
         if (!isPlaying.current || !detector.current || !videoRef.current || !myVideoRef.current) {
