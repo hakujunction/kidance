@@ -10,6 +10,7 @@ import { MyVideo } from "./components/myVideo";
 import { VideoProcessing } from "./components/videoProcessing";
 import { PoseDetector, SupportedModels, TrackerType, createDetector, movenet } from "@tensorflow-models/pose-detection";
 import { Progress } from "./components/Progress";
+import ExternalVideo from "./components/externalVideo";
 
 export default function KidancePage() {
   const [result, setResult] = useState(0);
@@ -61,7 +62,7 @@ export default function KidancePage() {
     initStartedRef.current = true;
     init();
   }, []);
-
+  
   return isLoading ? (
     <Box
       display="flex"
@@ -76,13 +77,12 @@ export default function KidancePage() {
   ): (
     <>
       <Box bgcolor='#000' width='100%'>
-      <video id="video" ref={videoRef as any} controls onEnded={(e) => {
+      <ExternalVideo onEnded={(e) => {
           setShowResult(true);
           setProgress(null);
         }}
-      >
-        <source src="/dance.mp4" type="video/mp4"/>
-      </video>
+        videoRef={videoRef}
+      />
       {showStartButton && <StartCounterButton onClick={() => {
         setShowStartButton(false);
         setIsOpenCounter(true);
