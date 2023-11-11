@@ -20,14 +20,15 @@ body {
 }
 
 .example-style {
-  animation: fade-in 2s;
-  transition: all 250ms linear 2s;
+  animation: fade-in 0.2s;
+  transition: all 250ms linear 0.2s;
 }
 
 @keyframes fade-in {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 100;
   }

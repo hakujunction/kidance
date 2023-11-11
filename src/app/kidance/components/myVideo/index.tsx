@@ -33,6 +33,14 @@ export function MyVideo({ videoRef }: MyVideoProps) {
       return;
     }
 
+    document.body.addEventListener('click', () => {
+      setTimeout(() => {
+        videoRef.current!.play();
+      }, 6000);
+    });
+
+    return;
+
     init();
   }, [videoRef.current]);
 
@@ -40,6 +48,8 @@ export function MyVideo({ videoRef }: MyVideoProps) {
     <video
       id="myVideo"
       ref={videoRef}
+      src="/dance.2.mp4"
+      loop
       style={{
         position: "absolute",
         bottom: 24,

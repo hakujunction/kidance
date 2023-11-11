@@ -14,35 +14,35 @@ const getConfigByPercent = (value: number | null): {
       theme: 'default'
     };
   }
-  if (value < 30) {
+  if (value <= 30) {
     return {
       text: 'MISSED',
       theme: 'MISSED'
     };
   }
 
-  if (value < 50) {
+  if (value <= 50) {
     return {
       text: 'OK',
       theme: 'default'
     }
   }
 
-  if (value < 80) {
+  if (value <= 80) {
     return {
       text: 'BETTER',
       theme: 'BETTER'
     };
   }
 
-  if (value < 90) {
+  if (value <= 90) {
    return {
     text: 'ALMOST',
     theme: 'ALMOST'
    }
   }
 
-  if (value < 100) {
+  if (value <= 100) {
    return {
     text: 'PERFECT',
     theme: 'PERFECT'
@@ -55,8 +55,9 @@ const getConfigByPercent = (value: number | null): {
 }
 
 export const Progress = ({value}: {value: number | null}) => {
-
   const {text, theme} = getConfigByPercent(value);
+
+  console.log("text", text);
 
   const colorTheme: any = {
     default: {
