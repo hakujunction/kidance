@@ -25,7 +25,7 @@ export function MyVideo({ videoRef }: MyVideoProps) {
       // Do nothing
     }
 
-  }, [videoRef.current]);
+  }, [videoRef]);
 
   useEffect(() => {
     if (!videoRef.current) {
@@ -33,7 +33,7 @@ export function MyVideo({ videoRef }: MyVideoProps) {
     }
 
     init();
-  }, [videoRef.current]);
+  }, [videoRef, init]);
 
   return (
     <video

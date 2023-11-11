@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, CircularProgress, Modal, Paper } from "@mui/material";
+import { Box } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 
 import { StartCounterButton } from "./components/startCounterButton";

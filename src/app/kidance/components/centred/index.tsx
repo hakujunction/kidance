@@ -2,8 +2,6 @@
 
 import { Box} from "@mui/material";
 
-import { StyledText } from "../styledText";
-
 const style = {
   width: '100vw',
   height: '100vh',
