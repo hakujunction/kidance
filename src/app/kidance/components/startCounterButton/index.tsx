@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import { StyledText } from "../styledText";
 import { Centred } from "../centred";
 

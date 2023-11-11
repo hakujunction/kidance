@@ -19,7 +19,7 @@ export const LoaderInfo = () => {
         <CircularProgress />
         </Box>
         </Box>
-        <img src="/1X1.png" id="bank" style={{ opacity: 0}} />
+        <img src="/1X1.png" id="bank" style={{ opacity: 0 }} alt="Bank" />
       </Centred>
     )
 }

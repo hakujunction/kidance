@@ -174,7 +174,7 @@ export function VideoProcessing({ videoRef, myVideoRef, detector, onScoreUpdate,
 
       clearInterval(intervalIdxRef.current);
     });
-  }, []);
+  }, [detector, myVideoRef, onProgress, onScoreUpdate, videoRef]);
 
   return null;
 }
