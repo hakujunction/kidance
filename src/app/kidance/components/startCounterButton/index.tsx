@@ -8,9 +8,9 @@ export const StartCounterButton = ({onClick}: {onClick: () => void}) => {
 
   return (
     <Centred onClick={() => {onClick()}} >
-      <Box textAlign={'center'} >
+    <Box textAlign={'center'} >
       <StyledText>PLAY</StyledText>
-       </Box>
+    </Box>
 
     </Centred>
   );
