@@ -1,14 +1,14 @@
 "use client";
 
-import { Box, Modal, Paper } from "@mui/material";
-import { useRef, useState } from "react";
+import { Box, CircularProgress, Modal, Paper } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
 
 import { StartCounterButton } from "./components/startCounterButton";
 import { TotalResult } from "./components/totalResult";
 import { StartCounter } from "./components/counter";
 import { MyVideo } from "./components/myVideo";
 import { VideoProcessing } from "./components/videoProcessing";
-import { PoseDetector, SupportedModels, createDetector } from "@tensorflow-models/pose-detection";
+import { PoseDetector, SupportedModels, TrackerType, createDetector, movenet } from "@tensorflow-models/pose-detection";
 
 export default function KidancePage() {
   const [result, setResult] = useState(0);
@@ -23,13 +23,48 @@ export default function KidancePage() {
   };
   const [showResult, setShowResult] = useState<boolean>(false);
   const [isOpenCounter, setIsOpenCounter] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const initStartedRef = useRef<boolean>(false);
 
-  return (
+  const init = async () => {
+    if (!detector.current) {
+      console.log("Init started");
+      detector.current = await createDetector(SupportedModels.MoveNet, {
+        modelType: movenet.modelType.MULTIPOSE_LIGHTNING,
+        enableSmoothing: true,
+        multiPoseMaxDimension: 256,
+        enableTracking: true,
+        trackerType: TrackerType.BoundingBox,
+      });
+      console.log("Init finished");
+    }
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    if (initStartedRef.current) {
+      return;
+    }
+
+    initStartedRef.current = true;
+    init();
+  }, []);
+
+  return isLoading ? (
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      height="100%"
+      flexDirection='column'
+    >
+      <CircularProgress />
+    </Box>
+  ): (
     <>
       <Box bgcolor='#000' width='100%'>
       <video id="video" ref={videoRef as any} controls  onEnded={(e) => {
           setShowResult(true);
-          console.log('ended')
         }}>
         <source src="/dance.mp4" type="video/mp4"/>
       </video>
@@ -47,6 +82,6 @@ export default function KidancePage() {
         onScoreUpdate={setResult} 
       />
     </>
-  )
+  );
 }
 
