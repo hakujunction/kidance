@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Keypoint,
 } from "@tensorflow-models/pose-detection";
