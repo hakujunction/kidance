@@ -35,6 +35,8 @@ export function VideoProcessing({ videoRef, myVideoRef, detector, onScoreUpdate,
   const frameCount = useRef<number>(0);
   const frameHitCount = useRef<number>(0);
   const intervalIdxRef = useRef<any>(0);
+
+  const currTimeRef = useRef<number>(0);
   
   useEffect(() => {
     if (!videoRef.current) {
@@ -90,6 +92,11 @@ export function VideoProcessing({ videoRef, myVideoRef, detector, onScoreUpdate,
           return;
         }
 
+        if (Date.now() - currTimeRef.current < 1000) {
+          requestAnimationFrame(detectMyPoses);
+          return;
+        }
+
         let myPoses: Pose[];
       
         try {
@@ -113,18 +120,20 @@ export function VideoProcessing({ videoRef, myVideoRef, detector, onScoreUpdate,
         currMePositions.current.left_wrist = myPositions.left_wrist;
         currMePositions.current.right_wrist = myPositions.right_wrist;
 
-        console.log("ml vr", myPositions.left_wrist, currVideoPositions.current.right_wrist);
-        console.log("mr vl", myPositions.right_wrist, currVideoPositions.current.left_wrist);
+        console.log(Date.now(), "ml vr", myPositions.left_wrist, currVideoPositions.current.right_wrist);
+        console.log(Date.now(), "mr vl", myPositions.right_wrist, currVideoPositions.current.right_wrist);
 
         frameCount.current += 2;
 
-        if (currVideoPositions.current.left_wrist === currMePositions.current.left_wrist) {
+        if (currVideoPositions.current.left_wrist === currMePositions.current.right_wrist) {
           frameHitCount.current += 1;
         }
 
-        if (currVideoPositions.current.right_wrist === currMePositions.current.right_wrist) {
+        if (currVideoPositions.current.right_wrist === currMePositions.current.left_wrist) {
           frameHitCount.current += 1;
         }
+
+        currTimeRef.current = Date.now();
 
         requestAnimationFrame(detectMyPoses);
       });

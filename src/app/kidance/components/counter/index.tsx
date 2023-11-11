@@ -1,7 +1,7 @@
 "use client";
 
 import { Box } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { StyledText } from "../styledText";
 
@@ -16,21 +16,23 @@ const style = {
 };
 
 export const StartCounter = ({setIsOpen, playVideo}: {setIsOpen: any, playVideo: any}) => {
-  const [counter, setCounter] = useState(5);
+  const [_timestamp, setTimestamp] = useState(Date.now());
+  const counter = useRef(5);
 
   useEffect(() => {
     const timeoutId = setInterval(() => {
-        setCounter((counter) => {
-          if (counter - 1 === -1) {
-            clearInterval(timeoutId);
-            setIsOpen(false);
-            playVideo();
-            return 5;
-          } else {
-            return counter - 1;
-          }
+        counter.current = counter.current - 1;
+        setTimestamp(Date.now());
+        if (counter.current === 0) {
+          clearInterval(timeoutId);
+          setIsOpen(false);
+          playVideo();
+        }
 
-        })
+        if (counter.current === -1) {
+          clearInterval(timeoutId);
+          counter.current = 5;
+        }
       }, 1000);
 
 
@@ -48,7 +50,7 @@ export const StartCounter = ({setIsOpen, playVideo}: {setIsOpen: any, playVideo:
     >
       <Box position={'relative'} padding={'10px'} zIndex={'9999'}>
       <Box paddingX={'20px'}>
-        <StyledText>{counter !== 0 ? counter.toString() : 'LET\'S GO'} </StyledText>
+        <StyledText>{counter.current !== 0 ? counter.current.toString() : 'LET\'S GO'} </StyledText>
       </Box>
       </Box>
     </Box>

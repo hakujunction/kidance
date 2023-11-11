@@ -86,14 +86,14 @@ export const getPositions = (keypointObject: KeypointObject): Positions => {
     right_ankle: 0,
   };
 
-  if (!keypointObject.left_shoulder || !keypointObject.right_shoulder) {
+  if (!keypointObject.left_shoulder || !keypointObject.right_shoulder || !keypointObject.left_hip) {
     return positions;
   }
 
-  const maxYShoulder = Math.max(
-    keypointObject.left_shoulder[1],
-    keypointObject.right_shoulder[1]
-  );
+  const maxYShoulder = (
+    keypointObject.left_shoulder[1] +
+    keypointObject.left_hip[1]
+  ) / 2;
 
   const middleXShoulder =
     (keypointObject.left_shoulder[0] + keypointObject.right_shoulder[0]) / 2;

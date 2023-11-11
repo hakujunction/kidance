@@ -38,6 +38,7 @@ export function MyVideo({ videoRef }: MyVideoProps) {
 
   return (
     <video
+      id="myVideo"
       ref={videoRef}
       style={{
         position: "absolute",

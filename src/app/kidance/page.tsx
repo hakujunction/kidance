@@ -17,9 +17,6 @@ export default function KidancePage() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const detector = useRef<PoseDetector | null>(null);
   const playVideo = async () => {
-    if (!detector.current) {
-      detector.current = await createDetector(SupportedModels.MoveNet);
-    }
     videoRef.current && videoRef.current.play();
   };
 
@@ -42,6 +39,16 @@ export default function KidancePage() {
         trackerType: TrackerType.BoundingBox,
       });
       console.log("Init finished");
+      console.log("Start preloading");
+      const imageElement = document.querySelector('img#bank') as HTMLImageElement;
+
+      if (!imageElement) {
+        return;
+      }
+
+      await detector.current.estimatePoses(imageElement)
+
+      console.log("Preloading finished");
     }
     setIsLoading(false);
   }
@@ -64,6 +71,7 @@ export default function KidancePage() {
       flexDirection='column'
     >
       <CircularProgress />
+      <img src="/banks.png" id="bank" style={{ opacity: 0}} />
     </Box>
   ): (
     <>
