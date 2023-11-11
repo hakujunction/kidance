@@ -89,12 +89,12 @@ export const Progress = ({value}: {value: number | null}) => {
     <>
       <div className="example-style">
       <Box marginLeft='3%' position={'absolute'} top='50%' marginTop={'-130px'}>
-          <StyledText colors={colors} fontSize="70px">{text} <br/> {value + '%'}</StyledText>
+          <StyledText colors={colors} fontSize="70px">{text}</StyledText>
       </Box>
       </div>
       <div className="example-style">
         <Box marginRight='3%' position={'absolute'} top='50%' right='0' marginTop={'-130px'}>
-        <StyledText colors={colors} fontSize="70px">{text} <br/> {value + '%'}</StyledText>
+        <StyledText colors={colors} fontSize="70px">{text}</StyledText>
         </Box>
       </div>
     </>

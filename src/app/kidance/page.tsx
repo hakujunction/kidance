@@ -13,6 +13,7 @@ import { Progress } from "./components/Progress";
 import ExternalVideo from "./components/externalVideo";
 import { LoaderInfo } from "./components/loaderInfo";
 import { MyVideoSame } from "./components/myVideoSame";
+import { prepareProgress } from "./components/utils";
 
 export default function KidancePage() {
   const [result, setResult] = useState(0);
@@ -86,8 +87,13 @@ export default function KidancePage() {
         detector={detector}
         videoRef={videoRef} 
         myVideoRef={myVideoRef} 
-        onScoreUpdate={setResult} 
-        onProgress={setProgress}
+        onScoreUpdate={(result) => setResult(Math.round(prepareProgress(result)))} 
+        onProgress={(progress) => {
+          let preparingProgress = Math.round(prepareProgress(progress));
+          console.log('preparingProgress', preparingProgress)
+
+          setProgress(preparingProgress || null);
+        }}
       />
       <div id="rest"></div>
     </>
