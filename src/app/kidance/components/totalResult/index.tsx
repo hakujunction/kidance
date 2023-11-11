@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Grid from '@mui/material/Grid';
 import { relative } from "path";
 import { StyledText } from "../styledText";
+import { StartCounter } from "../counter";
 
 const style = {
   width: '100vw',
@@ -17,20 +18,18 @@ const style = {
   alignItems: 'center'
 };
 
-export const TotalResult = ({isOpen}: {isOpen?: true}) => {
-  const [isShown, setIsShown] = useState<boolean>(isOpen || false);
-
+export const TotalResult = ({setIsShown, onRetry}: {setIsShown: any, onRetry: any}) => {
   return (
     <>
     <Box
-        display={isShown ? 'flex' : 'none'}
-        bgcolor={'rgba(0,0,0, 0.5)'}
+        display={'flex'}
+        bgcolor={'rgba(0,0,0, 0.7)'}
         sx={{...style}}
-        onClick={() => {setIsShown(false)}}
+        onClick={() => {setIsShown(false); onRetry()}}
     >
       <Box position={'relative'} padding={'10px'} zIndex={'9999'}>
       <Box paddingX={'20px'} textAlign={'center'}>
-        <StyledText>Total Result: <br/> 80%</StyledText>
+        <StyledText>Total Result: <br/> 80% <br/> <b>Try Again</b></StyledText>
       </Box>
       </Box>
     </Box>
