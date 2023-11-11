@@ -14,7 +14,7 @@ export const StyledText = ({
     primary: string;
     secondary: string;
   },
-  skipSecondary: boolean
+  skipSecondary?: boolean
 }) => {
   return (
     <Box paddingX='10px' position='relative' textAlign={'center'}>

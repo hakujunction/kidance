@@ -8,7 +8,7 @@ export const LoaderInfo = () => {
      <Centred>
         <Box position='relative' display='block' paddingX={'20px'}>
           <StyledText skipSecondary fontSize='32px'>
-            Hello, it's the Kidance project.
+            Hello, it is the Kidance project.
             <br /> We need a few seconds to load page.
             </StyledText>
         <br/>
