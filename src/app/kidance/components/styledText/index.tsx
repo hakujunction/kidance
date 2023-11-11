@@ -14,16 +14,24 @@ const style = {
 
 export const StyledText = ({
   children,
-  fontSize
-}: {children: React.ReactNode | string, fontSize?: string}) => {
+  fontSize,
+  colors
+}: {
+  children: React.ReactNode | string, 
+  fontSize?: string,
+  colors?: {
+    primary: string;
+    secondary: string;
+  }
+}) => {
 
 
 
   return (
     <Box paddingX='10px' position='relative' textAlign={'center'}>
-        <Typography color={'pink'} fontSize={fontSize || '144px'}>{children}</Typography>
+        <Typography color={colors?.primary || 'pink'} fontSize={fontSize || '144px'}>{children}</Typography>
         <Box position={"absolute"} zIndex={'9999'} top='4px' left='14px'>
-        <Typography color={'violet'}  fontSize={fontSize || '144px'}>{children}</Typography>
+        <Typography color={colors?.secondary || 'violet'}  fontSize={fontSize || '144px'}>{children}</Typography>
         </Box>
     </Box>
   );

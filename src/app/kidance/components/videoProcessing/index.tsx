@@ -55,7 +55,7 @@ export function VideoProcessing({ videoRef, myVideoRef, detector, onScoreUpdate,
         const currFrameHitCount = frameHitCount.current - lastFrameHitCount.current;
 
         onProgress?.(Math.floor(currFrameHitCount / currFrameCount * 100))
-      }, 5000);
+      }, 2000);
 
       requestAnimationFrame(async function detectPoses() {
         if (!isPlaying.current || !detector.current || !videoRef.current || !myVideoRef.current) {

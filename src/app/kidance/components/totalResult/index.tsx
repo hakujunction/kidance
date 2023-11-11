@@ -11,7 +11,8 @@ const style = {
   top: 0,
   left: 0,
   justifyContent: 'center',
-  alignItems: 'center'
+  alignItems: 'center',
+  cursor: 'pointer'
 };
 
 export const TotalResult = (

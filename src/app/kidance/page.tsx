@@ -26,7 +26,7 @@ export default function KidancePage() {
   const initStartedRef = useRef<boolean>(false);
   const [showStartButton, setShowStartButton] = useState(true);
   
-  const [progress, setProgress] = useState<number | null>(0);
+  const [progress, setProgress] = useState<number | null>(null);
 
   const init = async () => {
     if (!detector.current) {

@@ -1,6 +1,7 @@
 "use client";
 
 import { Box, Button } from "@mui/material";
+import { StyledText } from "../styledText";
 
 
 const style = {
@@ -10,18 +11,25 @@ const style = {
   top: 0,
   left: 0,
   justifyContent: 'center',
-  alignItems: 'center'
+  alignItems: 'center',
+  cursor: 'pointer'
 };
 
 export const StartCounterButton = ({onClick}: {onClick: () => void}) => {
 
   return (
     <>
+        <Box
+        display={'flex'}
+        bgcolor={'rgba(0,0,0, 0.7)'}
+        sx={{...style}}
+        onClick={() => {onClick()}}
+    >
     <Box textAlign={'center'} >
-                  <Button onClick={() => {
-                    onClick();
-                  }} size='large' variant="contained">Start</Button>
+    <StyledText>PLAY</StyledText>
                 </Box>
+
+    </Box>
     </>
   );
 }
