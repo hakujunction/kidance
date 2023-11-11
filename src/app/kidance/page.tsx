@@ -6,9 +6,10 @@ import { useRef, useState } from "react";
 import { StartCounterButton } from "./components/startCounterButton";
 import { TotalResult } from "./components/totalResult";
 import { StartCounter } from "./components/counter";
-
+import { MyVideo } from "./components/myVideo";
 
 export default function KidancePage() {
+  const myVideoRef = useRef<HTMLVideoElement>(null);
   const videoRef = useRef<HTMLVideoElement>();
   const playVideo = (event: any) => {
     videoRef.current && videoRef.current.play();
@@ -17,20 +18,22 @@ export default function KidancePage() {
   const [isOpenCounter, setIsOpenCounter] = useState(false);
 
   return (
-    <Box bgcolor='#000' width='100%'>
-    <video ref={videoRef as any} controls  onEnded={(e) => {
-        setShowResult(true);
-        console.log('ended')
-      }}>
-      <source src="/dance.mp4" type="video/mp4"/>
-    </video>
-    <StartCounterButton setIsOpen={setIsOpenCounter}  />
-
-    {isOpenCounter && <StartCounter setIsOpen={setIsOpenCounter} playVideo={playVideo}/>}
-    {showResult && <TotalResult setIsShown={setShowResult}  onRetry={() => {
-      setIsOpenCounter(true);
-    }}/>}
-    </Box>
+    <>
+      <Box bgcolor='#000' width='100%'>
+      <video id="video" ref={videoRef as any} controls  onEnded={(e) => {
+          setShowResult(true);
+          console.log('ended')
+        }}>
+        <source src="/dance.mp4" type="video/mp4"/>
+      </video>
+      <StartCounterButton setIsOpen={setIsOpenCounter}  />
+      {isOpenCounter && <StartCounter setIsOpen={setIsOpenCounter} playVideo={playVideo}/>}
+      {showResult && <TotalResult setIsShown={setShowResult}  onRetry={() => {
+        setIsOpenCounter(true);
+      }}/>}
+      </Box>
+      <MyVideo videoRef={myVideoRef} />
+    </>
   )
 }
 
