@@ -1,7 +1,7 @@
 "use client";
 
 import { Box } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { StyledText } from "../styledText";
 
@@ -16,28 +16,33 @@ const style = {
 };
 
 export const StartCounter = ({setIsOpen, playVideo}: {setIsOpen: any, playVideo: any}) => {
-  const [_timestamp, setTimestamp] = useState(Date.now());
-  const counter = useRef(5);
+  const [counter, setCounter] = useState(5);
+  const intervalRef = useRef<any>(null);
+
+
+
+    useLayoutEffect(() => {
+      if (counter === -1) {
+        setIsOpen(false);
+        clearInterval(intervalRef?.current);
+        setCounter(5);
+      }
+    }, [counter, setIsOpen]);
+
+    useEffect(() => {
+      if (counter === -1) {
+        playVideo();
+      }
+    }, [counter, playVideo]);
 
   useEffect(() => {
-    const timeoutId = setInterval(() => {
-        counter.current = counter.current - 1;
-        setTimestamp(Date.now());
-        if (counter.current === 0) {
-          clearInterval(timeoutId);
-          setIsOpen(false);
-          playVideo();
-        }
-
-        if (counter.current === -1) {
-          clearInterval(timeoutId);
-          counter.current = 5;
-        }
+    intervalRef.current = setInterval(() => {
+        setCounter((counter) => counter - 1)
       }, 1000);
 
 
       return function cleanup() {
-        clearInterval(timeoutId);
+        clearInterval(intervalRef.current);
       }
   }, []);
 
@@ -50,7 +55,7 @@ export const StartCounter = ({setIsOpen, playVideo}: {setIsOpen: any, playVideo:
     >
       <Box position={'relative'} padding={'10px'} zIndex={'9999'}>
       <Box paddingX={'20px'}>
-        <StyledText>{counter.current !== 0 ? counter.current.toString() : 'LET\'S GO'} </StyledText>
+        <StyledText>{counter !== 0 ? counter.toString() : 'LET\'S GO'} </StyledText>
       </Box>
       </Box>
     </Box>
