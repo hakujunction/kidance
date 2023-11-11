@@ -29,37 +29,7 @@ export default function KidancePage() {
   const initStartedRef = useRef<boolean>(false);
   const [showStartButton, setShowStartButton] = useState(true);
   
-  const [progress, setProgress] = useState('0%');
-  
-  useEffect(() => {
-    const timeoutId = setInterval(() => {
-      const pr = (Math.random() * 100 );
-      if (pr < 30) {
-        setProgress('doBetter');
-        return;
-      }
-
-      if (pr < 60) {
-        setProgress('good');
-        return;
-      }
-
-      if (pr < 90) {
-        setProgress('best');
-        return;
-      }
-
-      if (pr < 190) {
-        setProgress('excelent');
-        return;
-      }
-    }, 3000);
-
-
-    return function cleanup() {
-      clearInterval(timeoutId);
-    }
-  }, []);
+  const [progress, setProgress] = useState<number | null>(0);
 
   const init = async () => {
     if (!detector.current) {
@@ -100,7 +70,9 @@ export default function KidancePage() {
       <Box bgcolor='#000' width='100%'>
       <video id="video" ref={videoRef as any} controls onEnded={(e) => {
           setShowResult(true);
-        }}>
+          setProgress(null);
+        }}
+      >
         <source src="/dance.mp4" type="video/mp4"/>
       </video>
       {showStartButton && <StartCounterButton onClick={() => {
@@ -119,6 +91,7 @@ export default function KidancePage() {
         videoRef={videoRef} 
         myVideoRef={myVideoRef} 
         onScoreUpdate={setResult} 
+        onProgress={setProgress}
       />
     </>
   );
