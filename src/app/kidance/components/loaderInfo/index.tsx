@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, CircularProgress } from "@mui/material"
 import { Centred } from "../centred"
 import { StyledText } from "../styledText"
