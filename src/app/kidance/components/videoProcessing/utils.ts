@@ -28,7 +28,7 @@ type KeypointName =
 
 type KeypointObject = Record<KeypointName, [number, number] | undefined>;
 
-export const keyPointsToObject = (keypoints: Keypoint[]): KeypointObject => {
+export const keyPointsToObject = (keypoints: Keypoint[], video: string = "my"): KeypointObject => {
   const obj: KeypointObject = {
     nose: undefined,
     left_eye: undefined,
@@ -86,13 +86,13 @@ export const getPositions = (keypointObject: KeypointObject): Positions => {
     right_ankle: 0,
   };
 
-  if (!keypointObject.left_shoulder || !keypointObject.right_shoulder || !keypointObject.left_hip) {
+  if (!keypointObject.left_shoulder || !keypointObject.right_shoulder || !keypointObject.left_knee) {
     return positions;
   }
 
   const maxYShoulder = (
     keypointObject.left_shoulder[1] +
-    keypointObject.left_hip[1]
+    keypointObject.left_knee[1]
   ) / 2;
 
   const middleXShoulder =
