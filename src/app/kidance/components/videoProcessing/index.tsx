@@ -4,7 +4,7 @@ import { RefObject, useEffect, useRef } from "react";
 import { Positions, getPositions, keyPointsToObject } from "./utils";
 import { Pose, PoseDetector } from "@tensorflow-models/pose-detection";
 
-const ONPROGRESS_INTRVAL = '1000';
+const ONPROGRESS_INTRVAL = 1000;
 
 type VideoProcessingProps = {
   videoRef: RefObject<HTMLVideoElement>;

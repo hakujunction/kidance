@@ -11,6 +11,7 @@ import { VideoProcessing } from "./components/videoProcessing";
 import { PoseDetector, SupportedModels, TrackerType, createDetector, movenet } from "@tensorflow-models/pose-detection";
 import { Progress } from "./components/Progress";
 import ExternalVideo from "./components/externalVideo";
+import { LoaderInfo } from "./components/loaderInfo";
 
 export default function KidancePage() {
   const [result, setResult] = useState(0);
@@ -63,18 +64,10 @@ export default function KidancePage() {
     init();
   }, []);
   
-  return isLoading ? (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      height="100%"
-      flexDirection='column'
-    >
-      <CircularProgress />
-      <img src="/banks.png" id="bank" style={{ opacity: 0}} />
-    </Box>
-  ): (
+  if (isLoading) {
+    return <LoaderInfo />
+  }
+  return (
     <>
       <Box bgcolor='#000' width='100%'>
       <ExternalVideo onEnded={(e) => {
