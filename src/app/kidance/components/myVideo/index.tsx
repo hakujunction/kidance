@@ -44,7 +44,7 @@ export function MyVideo({ videoRef }: MyVideoProps) {
         bottom: 24,
         right: 24,
         borderRadius: "24px",
-        width: "500px",
+        width: "30%",
         height: "auto",
       }}
     ></video>

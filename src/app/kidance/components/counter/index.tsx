@@ -1,10 +1,8 @@
 "use client";
 
-import { Box, Button, Modal, Paper, Popover, TextField, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 
-import Grid from '@mui/material/Grid';
-import { relative } from "path";
 import { StyledText } from "../styledText";
 
 const style = {
@@ -39,7 +37,7 @@ export const StartCounter = ({setIsOpen, playVideo}: {setIsOpen: any, playVideo:
       return function cleanup() {
         clearInterval(timeoutId);
       }
-  }, [])
+  }, []);
 
   return (
     <>

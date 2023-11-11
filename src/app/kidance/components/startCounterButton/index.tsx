@@ -1,12 +1,7 @@
 "use client";
 
-import { Box, Button, Modal, Paper, Popover, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { Box, Button } from "@mui/material";
 
-import Grid from '@mui/material/Grid';
-import { relative } from "path";
-import { StyledText } from "../styledText";
-import { StartCounter } from "../counter";
 
 const style = {
   width: '100vw',
@@ -18,13 +13,13 @@ const style = {
   alignItems: 'center'
 };
 
-export const StartCounterButton = ({setIsOpen}: {setIsOpen: any}) => {
+export const StartCounterButton = ({onClick}: {onClick: () => void}) => {
 
   return (
     <>
     <Box textAlign={'center'} >
                   <Button onClick={() => {
-                    setIsOpen(true);
+                    onClick();
                   }} size='large' variant="contained">Start</Button>
                 </Box>
     </>
