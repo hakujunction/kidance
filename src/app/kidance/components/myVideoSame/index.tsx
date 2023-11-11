@@ -6,7 +6,7 @@ type MyVideoProps = {
   videoRef: RefObject<HTMLVideoElement>;
 };
 
-export function MyVideo({ videoRef }: MyVideoProps) {
+export function MyVideoSame({ videoRef }: MyVideoProps) {
 
   const init = useCallback(async () => {
     if (!videoRef.current) {
@@ -47,7 +47,7 @@ export function MyVideo({ videoRef }: MyVideoProps) {
     <video
       id="myVideo"
       ref={videoRef}
-      src="/dance.2.mp4"
+      src="/dance.mp4"
       loop
       style={{
         position: "absolute",

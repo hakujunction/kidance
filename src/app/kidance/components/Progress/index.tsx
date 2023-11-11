@@ -57,8 +57,6 @@ const getConfigByPercent = (value: number | null): {
 export const Progress = ({value}: {value: number | null}) => {
   const {text, theme} = getConfigByPercent(value);
 
-  console.log("text", text);
-
   const colorTheme: any = {
     default: {
       primary: 'pink',

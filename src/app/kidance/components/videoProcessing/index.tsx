@@ -34,7 +34,7 @@ export function VideoProcessing({ videoRef, myVideoRef, detector, onScoreUpdate,
     let score = 0;
 
     for (let i = min; i <= maxStepRef.current; i+=STEP) {
-      const videoResult = videoResultsRef.current[i];
+      const videoResult = videoResultsRef.current[i - STEP];
       const myVideoResult = myVideoResulstsRef.current[i];
 
       if (!videoResult || !myVideoResult) {
@@ -86,7 +86,6 @@ export function VideoProcessing({ videoRef, myVideoRef, detector, onScoreUpdate,
         }
 
         const score = Math.floor(calculateScore(currMyTime - ONPROGRESS_INTERVAL / 1000) / (fragmentsSize)) * 100;
-        console.log("set", score);
         onProgress?.(score);
       }, ONPROGRESS_INTERVAL);
 
@@ -102,10 +101,8 @@ export function VideoProcessing({ videoRef, myVideoRef, detector, onScoreUpdate,
         let poses: Pose[];
       
         try {
-          [poses, myPoses] = await Promise.all([
-            detector.current.estimatePoses(videoRef.current),
-            detector.current.estimatePoses(myVideoRef.current),
-          ]);
+          myPoses = await detector.current.estimatePoses(myVideoRef.current);
+          poses = await detector.current.estimatePoses(videoRef.current);
         } catch(e) {
           console.log(e);
           return;
@@ -134,8 +131,12 @@ export function VideoProcessing({ videoRef, myVideoRef, detector, onScoreUpdate,
 
         const currMyTime = Number.parseFloat(((Date.now() - startTimeRef.current) / 1000).toFixed(1));
 
-        if (currMyTime % STEP === 0 && !videoResultsRef.current[currMyTime]) {
+        if (currMyTime % STEP === 0 && !myVideoResulstsRef.current[currMyTime]) {
           myVideoResulstsRef.current[currMyTime] = myPositions;
+
+          console.log("ml vl", myPositions["left_wrist"], videoResultsRef.current[currMyTime]?.["left_wrist"]);
+          console.log("mr vr", myPositions["right_wrist"],videoResultsRef.current[currMyTime]?.["right_wrist"]);
+
           frameCount.current += 1;
           maxStepRef.current = Math.max(maxStepRef.current, currMyTime);
         }

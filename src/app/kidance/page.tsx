@@ -12,6 +12,7 @@ import { PoseDetector, SupportedModels, TrackerType, createDetector, movenet } f
 import { Progress } from "./components/Progress";
 import ExternalVideo from "./components/externalVideo";
 import { LoaderInfo } from "./components/loaderInfo";
+import { MyVideoSame } from "./components/myVideoSame";
 
 export default function KidancePage() {
   const [result, setResult] = useState(0);
@@ -33,13 +34,7 @@ export default function KidancePage() {
   const init = async () => {
     if (!detector.current) {
       console.log("Init started");
-      detector.current = await createDetector(SupportedModels.MoveNet, {
-        modelType: movenet.modelType.MULTIPOSE_LIGHTNING,
-        enableSmoothing: true,
-        multiPoseMaxDimension: 256,
-        enableTracking: true,
-        trackerType: TrackerType.BoundingBox,
-      });
+      detector.current = await createDetector(SupportedModels.MoveNet);
       console.log("Init finished");
       console.log("Start preloading");
       const imageElement = document.querySelector('img#bank') as HTMLImageElement;
@@ -94,6 +89,7 @@ export default function KidancePage() {
         onScoreUpdate={setResult} 
         onProgress={setProgress}
       />
+      <div id="rest"></div>
     </>
   );
 }
