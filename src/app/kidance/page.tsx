@@ -8,11 +8,10 @@ import { TotalResult } from "./components/totalResult";
 import { StartCounter } from "./components/counter";
 import { MyVideo } from "./components/myVideo";
 import { VideoProcessing } from "./components/videoProcessing";
-import { PoseDetector, SupportedModels, TrackerType, createDetector, movenet } from "@tensorflow-models/pose-detection";
+import { PoseDetector, SupportedModels, createDetector } from "@tensorflow-models/pose-detection";
 import { Progress } from "./components/Progress";
 import ExternalVideo from "./components/externalVideo";
 import { LoaderInfo } from "./components/loaderInfo";
-import { MyVideoSame } from "./components/myVideoSame";
 import { prepareProgress } from "./components/utils";
 
 export default function KidancePage() {
